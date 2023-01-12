@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector
+    android:height="108.0dip"
+    android:width="108.0dip"
+    android:viewportWidth="108.0"
+    android:viewportHeight="108.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <path
+        android:name="Background"
+        android:fillColor="@color/ic_launcher_background"
+        android:pathData="M54,102.6h-0c-26.84,0 -48.6,-21.76 -48.6,-48.6v-0c0,-26.84 21.76,-48.6 48.6,-48.6h0c26.84,0 48.6,21.76 48.6,48.6v0C102.6,80.84 80.84,102.6 54,102.6z" />
+    <group
+        android:name="Foreground"
+		android:drawable="@drawable/ic_android_studio" />
+</vector>

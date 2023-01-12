@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group android:checkableBehavior="single"
+		android:id="@+id/gp1">
+		<!--
+		<item
+		android:id="@+id/nav_player"
+		app:actionLayout="@layout/menu_player"
+		app:showAsAction="always" />
+		-->
+		<item
+            android:id="@+id/nav_users"
+            android:icon="@drawable/ic_account_group_outline"
+            android:title="Люди" />
+        <item
+            android:id="@+id/nav_dialogs"
+            android:icon="@drawable/ic_email_outline"
+            android:title="Диалоги" />
+        <item
+            android:id="@+id/nav_archive_news"
+            android:icon="@drawable/ic_archive_news"
+            android:title="Архив новостей" />
+        <item
+            android:id="@+id/nav_copyright_articles"
+            android:icon="@drawable/ic_copyright"
+            android:title="Авторские статьи" />
+		<item
+            android:id="@+id/nav_questions"
+            android:icon="@drawable/ic_qa"
+            android:title="Вопросы и ответы" />
+		<item
+            android:id="@+id/nav_useful_codes"
+            android:icon="@drawable/ic_code"
+            android:title="Полезные коды" />
+		<item
+            android:id="@+id/nav_photo_albums"
+            android:icon="@drawable/ic_photo_album"
+            android:title="Фотоальбомы" />
+
+
+    </group>
+
+	<group android:checkableBehavior="single"
+		android:id="@+id/gp2">
+		<item
+            android:id="@+id/nav_forum"
+            android:icon="@drawable/ic_forum"
+            android:title="Форум" />
+		<item
+            android:id="@+id/nav_writer_corner"
+            android:icon="@drawable/ic_write"
+            android:title="Уголок писателя" />
+		<item
+            android:id="@+id/nav_diaries"
+            android:icon="@drawable/ic_diary"
+            android:title="Дневники" />
+		<item
+            android:id="@+id/nav_guest_book"
+            android:icon="@drawable/ic_guest_book"
+            android:title="Гостевая книга" />
+	</group>
+
+
+</menu>

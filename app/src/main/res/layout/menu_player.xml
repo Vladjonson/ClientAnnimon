@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:gravity="center|center_vertical|center_horizontal">
+
+	<TextView
+		android:layout_height="wrap_content"
+		android:textAppearance="?android:attr/textAppearanceSmall"
+		android:layout_width="wrap_content"
+		android:layout_gravity="center|center_vertical|center_horizontal"
+		android:gravity="center|center_vertical|center_horizontal"
+		android:id="@+id/menuplayerTextViewName"
+		android:text="name"/>
+
+	<SeekBar
+		android:layout_height="30dp"
+		android:layout_width="match_parent"
+		android:id="@+id/menuplayerSeekBarTime"/>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:orientation="horizontal"
+		android:gravity="center|center_vertical|center_horizontal">
+
+		<ImageButton
+			style="?android:attr/buttonBarButtonStyle"
+			android:layout_height="40dp"
+			android:layout_width="40dp"
+			android:src="@drawable/ic_skip_previous_outline"
+			android:id="@+id/menuplayerImageButtonPrev"/>
+
+		<ImageButton
+			style="?android:attr/buttonBarButtonStyle"
+			android:layout_height="40dp"
+			android:layout_width="40dp"
+			android:src="@drawable/ic_play_outline"
+			android:id="@+id/menuplayerImageButtonPlay"/>
+
+		<ImageButton
+			style="?android:attr/buttonBarButtonStyle"
+			android:layout_height="40dp"
+			android:layout_width="40dp"
+			android:src="@drawable/ic_skip_next_outline"
+			android:id="@+id/menuplayerImageButtonNext"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

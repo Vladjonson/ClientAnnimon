@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:weightSum="1.0">
+
+		<ImageView
+			android:src="@drawable/ava"
+			android:layout_width="48dp"
+			android:layout_height="48dp"
+			android:id="@+id/dialogslistitemAva"/>
+
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"
+			android:layout_marginTop="10dp">
+
+			<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Vlad_Jonson"
+					android:layout_weight="0.50"
+					android:id="@+id/dialogslistitemUser"/>
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="13.12.2022 / 21:45"
+					android:layout_weight="0.50"
+					android:gravity="top|right"
+					android:id="@+id/dialogslistitemDate"/>
+
+			</LinearLayout>
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:text="текстовое сообщение..."
+				android:gravity="center_vertical"
+				android:id="@+id/dialogslistitemMessage"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>
+
