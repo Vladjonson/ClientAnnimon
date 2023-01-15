@@ -10,8 +10,10 @@ import android.widget.TextView;
 import com.eximius.annimonclient.R;
 import com.eximius.annimonclient.data.News;
 import java.util.ArrayList;
+import com.eximius.annimonclient.utils.GlideImageGetter;
 
 public class ArchiveNewsAdapter extends BaseAdapter {
+    
 	private Context context;
 	private ArrayList<News> allNews;
 	private TextView tvTitle;
@@ -53,14 +55,17 @@ public class ArchiveNewsAdapter extends BaseAdapter {
 
 		tvTitle.setText(Html.fromHtml(getItem(position).getTitle()));
 
-		tvText.setText(Html.fromHtml(getItem(position).getText()));
+		tvText.setText(Html.fromHtml(getItem(position).getText(),new GlideImageGetter(tvText),null));
 
 		tvAuthor.setText(Html.fromHtml(getItem(position).getAuthor()));
 
 		return v;
 	}
 
-
-
+    
+    
+    //
+    
+    //
 
 }

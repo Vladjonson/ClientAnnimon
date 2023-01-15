@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import com.eximius.annimonclient.data.PhotoAlbum;
+import androidx.core.math.MathUtils;
+import com.eximius.annimonclient.data.Photo;
 
 public class Api {
 
@@ -52,8 +55,12 @@ public class Api {
 	}
 
 	public static ArrayList<Message> getGuestBookPosts() {
-		//time send - div.list2 small
-		//message - div.list2>div
+        //sender id -
+        //sender ava -
+        //sender - 
+        //message -
+		//date send - div.list2 small
+        
 		ArrayList<Message> allPosts=new ArrayList<Message>();
 
 		for (int i = 0; i < 10; i++) {
@@ -109,5 +116,36 @@ public class Api {
         } catch (Exception e) {return new ArrayList<User>();}
 
 	}
+    
+    public static ArrayList<PhotoAlbum> getPhotoAlbums(){
+        
+        try{
+            ArrayList<PhotoAlbum> albums=new ArrayList<PhotoAlbum>();
+            //Document doc=Jsoup.connect("https://annimon.com/files/photo/1.jpg").get();
+            for(int i=0;i<50;i++){
+                PhotoAlbum album=new PhotoAlbum();
+                album.setId(i);
+                album.setName("Photo album "+i);
+                album.setAuthor("User "+i);
+                album.setNumPhotos((int)(Math.random()*50));
+                albums.add(album);
+            }
+            return albums;
+        }catch(Exception e){return new ArrayList<PhotoAlbum>();}
+    }
+    
+    public static ArrayList<Photo> getPhotos(){
+        try{
+            ArrayList<Photo> photos=new ArrayList<Photo>();
+            
+            for (int i = 0; i < 50; i++) {
+                Photo photo=new Photo();
+                photo.setPhoto("");
+                photo.setImg("");
+                photos.add(photo);
+            }
+            return photos;
+        }catch(Exception e){return new ArrayList<Photo>();}
+    }
 
 }

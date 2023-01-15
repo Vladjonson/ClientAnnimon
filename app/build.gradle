@@ -26,6 +26,7 @@ android {
 }
 
 dependencies {
+	api 'androidx.recyclerview:recyclerview:1.0.0'
 	//api 'androidx.lifecycle:lifecycle-livedata:+'
 	api 'androidx.lifecycle:lifecycle-livedata:1.0.0'
     api 'androidx.appcompat:appcompat:1.0.0'
