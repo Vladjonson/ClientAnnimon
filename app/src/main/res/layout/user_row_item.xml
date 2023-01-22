@@ -10,13 +10,11 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:text="Text"
-		android:id="@+id/userRowItemText"
-		android:textColor="#FFFFFFFF"/>
+		android:id="@+id/userRowItemText"/>
 
 	<TextView
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:textColor="#FF79848C"
 		android:id="@+id/userRowItemDescription"/>
 
 </LinearLayout>

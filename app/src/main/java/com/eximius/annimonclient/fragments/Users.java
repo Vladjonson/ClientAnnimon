@@ -1,13 +1,14 @@
 package com.eximius.annimonclient.fragments;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 import com.eximius.annimonclient.Api;
@@ -15,14 +16,16 @@ import com.eximius.annimonclient.R;
 import com.eximius.annimonclient.adapters.UserAdapter;
 
 public class Users extends Fragment {
-	ListView lv;
-	UserAdapter adapter;
-	Context context;
-    ProgressDialog progressDialog;
+
+	private ListView lv;
+	private UserAdapter adapter;
+    private ProgressDialog progressDialog;
+    private int page;
+    private Button btnPrevPage;
+    private Button btnNextPage;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		this.context = container.getContext();
 		return inflater.inflate(R.layout.fragment_users, container, false);
 	}
 
@@ -31,6 +34,8 @@ public class Users extends Fragment {
 		super.onViewCreated(view, savedInstanceState);
 
 		lv = view.findViewById(R.id.fragmentUsersListView);
+        btnPrevPage = view.findViewById(R.id.navPagePrev);
+        btnNextPage = view.findViewById(R.id.navPageNext);
 
         progressDialog = new ProgressDialog(getActivity());
 
@@ -40,17 +45,34 @@ public class Users extends Fragment {
 
 				@Override
 				public void onItemClick(AdapterView<?> p1, View p2, int p3, long p4) {
-					getFragmentManager().beginTransaction().replace(R.id.content_frame, new UserProfile(adapter.getItem(p3))).addToBackStack("").commit();
+					getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_frame, new UserProfile(adapter.getItem(p3)))
+                        .addToBackStack("")
+                        .commit();
 				}
-
-
             });
 
+        btnPrevPage.setOnClickListener(new OnClickListener(){
 
+                @Override
+                public void onClick(View p1) {
+                    page -= 10;
+                    new GetUsers().execute();
+                }
+            });
 
+        btnNextPage.setOnClickListener(new OnClickListener(){
+
+                @Override
+                public void onClick(View p1) {
+                    page += 10;
+                    new GetUsers().execute();
+                }
+            });
 	}
 
-    //
+
     private class GetUsers extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -63,8 +85,7 @@ public class Users extends Fragment {
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                //adapter=new ArchiveNewsAdapter(getActivity(),Api.getNews(navPage));
-                adapter = new UserAdapter(getActivity(), Api.getUsers());
+                adapter = new UserAdapter(getActivity(), Api.getUsers(page));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -78,9 +99,4 @@ public class Users extends Fragment {
             progressDialog.hide();
         }
     }
-	//
-
-
-
-
 }

@@ -21,16 +21,15 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 
-
 public class UserProfile extends Fragment {
-    ProgressDialog progressDialog;
-	ImageView userAva;
-	TextView userNick;
-	TextView userStatusOnline;
-	ListView lv;
-	User user;
 
-    ArrayList<ItemModel> itemsList = new ArrayList<>();
+    private ProgressDialog progressDialog;
+	private ImageView userAva;
+	private TextView userNick;
+	private TextView userStatusOnline;
+	private ListView lv;
+	private User user;
+    private ArrayList<ItemModel> itemsList = new ArrayList<>();
 
 	public UserProfile(User user) {
 		this.user = user;
@@ -44,7 +43,6 @@ public class UserProfile extends Fragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-
         lv = view.findViewById(R.id.fragmentUserListView);
 		userAva = view.findViewById(R.id.fragmentUserAva);
 		userNick = view.findViewById(R.id.fragmentUserNickName);
@@ -52,11 +50,10 @@ public class UserProfile extends Fragment {
         progressDialog = new ProgressDialog(getActivity());
         new GetUser().execute();
 
-
         Glide.with(getContext())
             .load("https://annimon.com/files/photo/" + user.getId() + ".jpg")
-            .centerCrop()
-            .placeholder(R.drawable.ava)
+            .centerInside()
+            .placeholder(R.drawable.no_ava)
             .into(userAva);
 
         userNick.setText(user.getNick());
@@ -65,8 +62,6 @@ public class UserProfile extends Fragment {
         } else {
             userStatusOnline.setText("был в сети " + user.getLastTimeOnline());
         }
-
-
 	}
 
 
@@ -74,17 +69,10 @@ public class UserProfile extends Fragment {
         try {
             Document doc=Jsoup.connect("https://annimon.com/user/" + user.getNick().toLowerCase()).get();
             String data=doc.select("div.maintxt").toString();
-            user.setName(doc.getElementsByTag("meta").get(9).toString());
+            user.setName(doc.getElementsByTag("meta").get(9).attr("content"));
             //user.setBirthDay(data[1]);
             //user.setAbout(data[2]);
-
-
         } catch (Exception e) {}
-
-
-
-
-
 	}
 
 	private ArrayList sortAndAddSections(ArrayList<ItemModel> itemList) {
@@ -105,7 +93,6 @@ public class UserProfile extends Fragment {
             }
             tempList.add(itemList.get(i));
         }
-
         return tempList;
     }
 
@@ -135,13 +122,8 @@ public class UserProfile extends Fragment {
                 TextView tvText = (TextView) v.findViewById(R.id.userRowItemText);
                 TextView tvDescription = (TextView) v.findViewById(R.id.userRowItemDescription);
 
-				// TextView tv_item_plus = (TextView) v.findViewById(R.id.tv_item_plus);
-
                 tvText.setText(cell.getItemText());
                 tvDescription.setText(cell.getItemDescription());
-                //tv_item_plus.setText(cell.getItemPulse());
-
-
             }
             return v;
         }
@@ -202,11 +184,5 @@ public class UserProfile extends Fragment {
             ListAdapter adapter = new ListAdapter(getContext(), itemsList);
             lv.setAdapter(adapter);
         }
-
-
-
-
     }
-
-
 }

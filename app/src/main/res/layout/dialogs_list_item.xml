@@ -12,7 +12,7 @@
 		android:weightSum="1.0">
 
 		<ImageView
-			android:src="@drawable/ava"
+			android:src="@drawable/no_ava"
 			android:layout_width="48dp"
 			android:layout_height="48dp"
 			android:id="@+id/dialogslistitemAva"/>

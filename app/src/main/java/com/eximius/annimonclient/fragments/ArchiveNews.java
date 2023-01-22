@@ -15,12 +15,13 @@ import com.eximius.annimonclient.R;
 import com.eximius.annimonclient.adapters.ArchiveNewsAdapter;
 
 public class ArchiveNews extends Fragment {
-	ListView lv;
-	ArchiveNewsAdapter adapter;
-	ProgressDialog progressDialog;
-	int navPage=0;
-    Button navPrev;
-    Button navNext;
+
+	private ListView lv;
+	private ArchiveNewsAdapter adapter;
+	private ProgressDialog progressDialog;
+	private int navPage=0;
+    private Button navPrev;
+    private Button navNext;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,9 +32,11 @@ public class ArchiveNews extends Fragment {
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		lv = view.findViewById(R.id.fragmentarchivenewsListView);
-        navPrev = view.findViewById(R.id.navpagePrev);
-        navNext = view.findViewById(R.id.navpageNext);
+        navPrev = view.findViewById(R.id.navPagePrev);
+        navNext = view.findViewById(R.id.navPageNext);
 		progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setProgressStyle(android.R.attr.progressBarStyleSmall);
+
 		new GetNews().execute();
 
         navPrev.setOnClickListener(new OnClickListener(){
@@ -44,7 +47,6 @@ public class ArchiveNews extends Fragment {
                     new GetNews().execute();
                     adapter.notifyDataSetChanged();
                 }
-
             });
 
         navNext.setOnClickListener(new OnClickListener(){
@@ -55,13 +57,10 @@ public class ArchiveNews extends Fragment {
                     new GetNews().execute();
                     adapter.notifyDataSetChanged();
                 }
-
-
             });
 	}
 
 
-	//
 	private class GetNews extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -88,8 +87,4 @@ public class ArchiveNews extends Fragment {
 			progressDialog.hide();
         }
     }
-	//
-
-
-
 }

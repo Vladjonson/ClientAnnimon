@@ -10,5 +10,6 @@
     <color name="colorPrimaryDark">#01579b</color>
     <color name="colorAccent">#5fa3de</color>
 	<color name="ic_launcher_background">#01579b</color>
+    <color name="colorBackground">@android:color/background_dark</color>
 
 </resources>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content">
+
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="Some question ..."
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:id="@+id/qalistitemText"/>
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_vertical">
+
+		<ImageView
+			android:src="@drawable/ic_thumb_up"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="0"
+			android:gravity="center"
+			android:id="@+id/qalistitemLikes"/>
+
+		<ImageView
+			android:src="@drawable/ic_eye_outline"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="0"
+			android:gravity="center"
+			android:id="@+id/qalistitemViews"/>
+
+		<ImageView
+			android:src="@drawable/ic_account"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="User"
+			android:id="@+id/qalistitemUser"/>
+
+		<ImageView
+			android:src="@drawable/ic_clock_time_three_outline"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="8.02.2020"
+			android:id="@+id/qalistitemTime"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

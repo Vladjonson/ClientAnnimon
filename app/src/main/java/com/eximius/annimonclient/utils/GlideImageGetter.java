@@ -23,7 +23,7 @@ public class GlideImageGetter implements ImageGetter {
     private WeakReference<TextView> container;
     private boolean matchParentWidth;
     private HtmlImagesHandler imagesHandler;
-    private float density = 1.0f;
+    private float density = 2.0f;
 
     public GlideImageGetter(TextView textView) {
         this(textView, false, false, null);
@@ -66,8 +66,6 @@ public class GlideImageGetter implements ImageGetter {
                         .load(source)
                         .into(drawable);
                 }
-
-
             });
 
         return drawable;
@@ -156,11 +154,9 @@ public class GlideImageGetter implements ImageGetter {
 
         @Override
         public void onDestroy() {}
-
     }
 
     public interface HtmlImagesHandler {
         void addImage(String uri);
     }
-
 }

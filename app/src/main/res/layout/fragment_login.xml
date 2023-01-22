@@ -51,7 +51,8 @@
 			app:cardCornerRadius="10dp"
 			app:cardPreventCornerOverlap="false"
 			app:cardUseCompatPadding="false"
-			card_view:cardElevation="10dp">
+			card_view:cardElevation="10dp"
+			app:cardBackgroundColor="@color/colorPrimaryDark">
 
 			<RelativeLayout
 				android:layout_width="match_parent"
@@ -81,8 +82,7 @@
 						android:id="@+id/fragmentloginToken"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:singleLine="true"
-						android:hint="Token"/>
+						android:singleLine="true"/>
 
 					<Button
 						android:layout_width="wrap_content"

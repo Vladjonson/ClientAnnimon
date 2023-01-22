@@ -1,6 +1,7 @@
 package com.eximius.annimonclient.data;
 
 public class User {
+
 	private int id;
 	private String avaUrl;
 	private String nick;
@@ -26,9 +27,6 @@ public class User {
 	private String rank;
 	private String status;
 
-	public User() {
-
-	}
 
 	public void setId(int id) {
 		this.id = id;
@@ -221,7 +219,4 @@ public class User {
 	public String getStatus() {
 		return status;
 	}
-
-
-
 }

@@ -11,15 +11,15 @@
 		android:layout_height="wrap_content">
 
 		<ImageView
-			android:src="@drawable/ava"
+			android:src="@drawable/no_ava"
 			android:layout_width="48dp"
 			android:layout_height="48dp"
 			android:id="@+id/usersListItemAva"/>
 
 		<ImageView
 			android:src="@drawable/ic_account"
-			android:layout_width="16dp"
-			android:layout_height="16dp"
+			android:layout_width="24dp"
+			android:layout_height="24dp"
 			android:padding="2dp"
 			android:id="@+id/userslistitemStatusOnline"/>
 
@@ -41,8 +41,8 @@
 
 				<ImageView
 					android:src="@drawable/ic_star_face"
-					android:layout_width="16dp"
-					android:layout_height="16dp"
+					android:layout_width="24dp"
+					android:layout_height="24dp"
 					android:id="@+id/userslistitemImageStatus"
 					android:padding="2dp"
 					android:layout_gravity="center"/>

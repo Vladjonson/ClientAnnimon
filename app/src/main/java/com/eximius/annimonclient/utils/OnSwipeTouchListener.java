@@ -10,13 +10,13 @@ import android.widget.ListView;
 
 public abstract class OnSwipeTouchListener implements OnTouchListener {
 
-    ListView list;
+    private ListView list;
     private GestureDetector gestureDetector;
     private Context context;
 
     public OnSwipeTouchListener(Context ctx, ListView list) {
-        gestureDetector = new GestureDetector(ctx, new GestureListener());
-        context = ctx;
+        this.gestureDetector = new GestureDetector(ctx, new GestureListener());
+        this.context = ctx;
         this.list = list;
     }
 
@@ -32,7 +32,6 @@ public abstract class OnSwipeTouchListener implements OnTouchListener {
     public abstract void onSwipeRight(int pos);
 
     public void onSwipeLeft(int pos) {
-
 	}
 
     private final class GestureListener extends SimpleOnGestureListener {
@@ -65,6 +64,5 @@ public abstract class OnSwipeTouchListener implements OnTouchListener {
             }
             return false;
         }
-
     }
 }

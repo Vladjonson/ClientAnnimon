@@ -1,6 +1,5 @@
 package com.eximius.annimonclient;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -24,48 +23,50 @@ import com.eximius.annimonclient.fragments.Users;
 import com.eximius.annimonclient.fragments.WriterCorner;
 import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
+import com.eximius.annimonclient.utils.MiniFM;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-	Toolbar toolbar;
-	DrawerLayout drawer;
-	ActionBarDrawerToggle toogle;
-	NavigationView navigationView;
-	FragmentManager fragmentManager;
-	ArrayList<Fragment> allFragments=new ArrayList<Fragment>();
+	private Toolbar toolbar;
+	private DrawerLayout drawer;
+	private ActionBarDrawerToggle toogle;
+	private NavigationView navigationView;
+	private FragmentManager fragmentManager;
+	private ArrayList<Fragment> allFragments=new ArrayList<Fragment>();
+    //private MiniFM fm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-		toolbar = findViewById(R.id.toolbar);
-		drawer = findViewById(R.id.drawer_layout);
-		navigationView = findViewById(R.id.nav_view);
-		fragmentManager = getSupportFragmentManager();
-		toolbar.setTitleTextColor(Color.WHITE);
+		this.toolbar = findViewById(R.id.toolbar);
+		this.drawer = findViewById(R.id.drawer_layout);
+		this.navigationView = findViewById(R.id.nav_view);
+		this.fragmentManager = getSupportFragmentManager();
 		setSupportActionBar(toolbar);
-		toogle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+		this.toogle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 		drawer.setDrawerListener(toogle);
 		toogle.syncState();
-
 		navigationView.setNavigationItemSelectedListener(this);
 
 		loadFragments();
+        //fm=new MiniFM(this);
     }
 
 	@Override
 	public boolean onNavigationItemSelected(MenuItem p1) {
 		navigationView.setCheckedItem(p1);
 		setTitle(p1.getTitle());
-		fragmentManager.beginTransaction().replace(R.id.content_frame, allFragments.get(getNavId())).commit();
-		//fragmentManager.beginTransaction().replace(R.id.content_frame,new Users()).commit();
+		fragmentManager.beginTransaction()
+            .replace(R.id.content_frame, allFragments.get(getNavId()))
+            .commit();
 		drawer.closeDrawer(GravityCompat.START);
 		return true;
 	}
 
 
-
+    
 	@Override
 	public void onBackPressed() {
 		if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -90,8 +91,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		allFragments.add(new WriterCorner());
 		allFragments.add(new Diarys());
 		allFragments.add(new GuestBook());
-		fragmentManager.beginTransaction().replace(R.id.content_frame, new Login()).commit();
 
+		fragmentManager.beginTransaction()
+            .replace(R.id.content_frame, new Login())
+            .commit();
 	}
 
 	private int getNavId() {
@@ -102,6 +105,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 		}
 		return -1;
 	}
-
-
 }

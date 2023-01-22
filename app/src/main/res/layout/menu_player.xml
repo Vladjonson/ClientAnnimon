@@ -6,19 +6,17 @@
 	android:orientation="vertical"
 	android:gravity="center|center_vertical|center_horizontal">
 
-	<TextView
-		android:layout_height="wrap_content"
-		android:textAppearance="?android:attr/textAppearanceSmall"
-		android:layout_width="wrap_content"
-		android:layout_gravity="center|center_vertical|center_horizontal"
-		android:gravity="center|center_vertical|center_horizontal"
-		android:id="@+id/menuplayerTextViewName"
-		android:text="name"/>
-
 	<SeekBar
 		android:layout_height="30dp"
 		android:layout_width="match_parent"
 		android:id="@+id/menuplayerSeekBarTime"/>
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="Author-Music"
+		android:textAppearance="?android:attr/textAppearanceSmall"
+		android:id="@+id/menuplayerTextViewName"/>
 
 	<LinearLayout
 		android:layout_height="wrap_content"

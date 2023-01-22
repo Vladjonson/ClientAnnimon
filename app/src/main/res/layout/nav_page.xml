@@ -1,25 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:orientation="horizontal"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content">
 
 	<Button
+		android:id="@+id/navPagePrev"
+		android:drawableLeft="@drawable/ic_arrow_left_circle_outline"
+		android:text="Назад"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="«"
+		style="@style/AppTheme.Button"
 		android:layout_weight="1.0"
-		android:textAppearance="?android:attr/textAppearanceSmall"
-		android:id="@+id/navpagePrev"/>
+		android:gravity="center"/>
 
 	<Button
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:text="»"
+		android:text="Вперед"
+		android:drawableRight="@drawable/ic_arrow_right_circle_outline"
+		android:id="@+id/navPageNext"
+		style="@style/AppTheme.Button"
 		android:layout_weight="1.0"
-		android:textAppearance="?android:attr/textAppearanceSmall"
-		android:id="@+id/navpageNext"/>
+		android:gravity="center"/>
 
 </LinearLayout>
 

@@ -8,9 +8,6 @@ public class News {
 	private String author;
 	private String dateAdd;
 
-    public News() {
-
-    }
 
 	public void setId(int id) {
 		this.id = id;
@@ -50,4 +47,5 @@ public class News {
 
 	public String getDateAdd() {
 		return dateAdd;
-	}}
+	}
+}

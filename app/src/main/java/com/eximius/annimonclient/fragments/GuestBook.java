@@ -11,8 +11,8 @@ import com.eximius.annimonclient.R;
 import com.eximius.annimonclient.adapters.MessageAdapter;
 
 public class GuestBook extends Fragment {
-	private ListView lv;
 
+	private ListView lv;
 	private MessageAdapter adapter;
 
 	@Override
@@ -27,7 +27,4 @@ public class GuestBook extends Fragment {
 		adapter = new MessageAdapter(getActivity(), Api.getGuestBookPosts());
 		lv.setAdapter(adapter);
 	}
-
-
-
 }

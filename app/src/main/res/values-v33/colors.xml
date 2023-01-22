@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <color name="logoColor">#ffbbbbbc</color>
+	<color name="colorAccent">@android:color/system_accent1_400</color>
+    <color name="colorPrimaryDark">#01579b</color>
+    <color name="colorPrimary">@android:color/system_accent2_900</color>
+	<color name="ic_launcher_background">#01579b</color>
+    <color name="colorBackground">@android:color/system_neutral1_50</color>
+
+</resources>

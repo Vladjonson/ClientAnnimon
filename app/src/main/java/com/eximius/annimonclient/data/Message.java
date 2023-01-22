@@ -1,15 +1,13 @@
 package com.eximius.annimonclient.data;
 
 public class Message {
+
 	private int id;
 	private String senderAvaUrl;
 	private String sender;
 	private String message;
 	private String dateSend;
 
-    public Message() {
-
-    }
 
 	public void setId(int id) {
 		this.id = id;
@@ -49,4 +47,5 @@ public class Message {
 
 	public String getDateSend() {
 		return dateSend;
-	}}
+	}
+}

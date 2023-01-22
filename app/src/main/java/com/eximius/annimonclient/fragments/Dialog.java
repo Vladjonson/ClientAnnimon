@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 import com.eximius.annimonclient.R;
@@ -16,12 +16,12 @@ import java.util.Date;
 
 public class Dialog extends Fragment {
 
-	ListView lv;
-	EditText et;
-	Button btn;
-	ArrayList<Message> messages=new ArrayList<Message>();
-	MessageAdapter adapter;
-	Date date;
+	private ListView lv;
+	private EditText et;
+	private ImageButton btn;
+	private ArrayList<Message> messages=new ArrayList<Message>();
+	private MessageAdapter adapter;
+	private Date date;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class Dialog extends Fragment {
 		date = new Date();
 		lv = view.findViewById(R.id.fragmentdialogListView);
 		et = view.findViewById(R.id.fragmentdialogEditText);
-		btn = view.findViewById(R.id.fragmentdialogButton);
+		btn = view.findViewById(R.id.fragmentdialogImageButton);
 
 		for (int i = 0; i < 50; i++) {
 			Message msg=new Message();
@@ -46,8 +46,7 @@ public class Dialog extends Fragment {
 
 		adapter = new MessageAdapter(getActivity(), messages);
 		lv.setAdapter(adapter);
-
-		btn = view.findViewById(R.id.fragmentdialogButton);
+        lv.setSelection(messages.size());
 
 		btn.setOnClickListener(new View.OnClickListener(){
 
@@ -61,14 +60,10 @@ public class Dialog extends Fragment {
                                     "." + date.getYear() +
                                     " / " + date.getHours() +
                                     ":" + date.getMinutes() + "");
-					messages.add(0, msg);
+					messages.add(msg);
 					adapter.notifyDataSetChanged();
+                    lv.setSelection(messages.size());
 				}
-
-
             });
 	}
-
-
-
 }

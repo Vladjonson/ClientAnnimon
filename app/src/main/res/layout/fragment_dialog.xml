@@ -3,35 +3,36 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:weightSum="1.0">
+	android:layout_height="match_parent">
+
+	<ListView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_weight="1.0"
+		android:id="@+id/fragmentdialogListView"/>
 
 	<LinearLayout
 		android:orientation="horizontal"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content">
+		android:layout_height="wrap_content"
+		android:gravity="bottom">
 
 		<EditText
 			android:layout_width="match_parent"
-			android:inputType="textLongMessage"
-			android:layout_height="wrap_content"
 			android:ems="10"
-			android:layout_weight="1.0"
-			android:id="@+id/fragmentdialogEditText"/>
-
-		<Button
-			android:layout_width="wrap_content"
-			style="?android:attr/buttonBarButtonStyle"
 			android:layout_height="wrap_content"
-			android:text="Отправить"
-			android:id="@+id/fragmentdialogButton"/>
+			android:layout_weight="1.0"
+			android:id="@+id/fragmentdialogEditText"
+			android:maxLines="3"/>
+
+		<ImageButton
+			android:src="@drawable/ic_send"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/fragmentdialogImageButton"
+			android:background="#00000000"/>
 
 	</LinearLayout>
-
-	<ListView
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:id="@+id/fragmentdialogListView"/>
 
 </LinearLayout>
 

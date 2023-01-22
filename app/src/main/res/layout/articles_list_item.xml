@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content">
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="Title"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:id="@+id/articleslistitemTitle"/>
+
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="Some text..."
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:id="@+id/articleslistitemText"/>
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center_vertical">
+
+		<ImageView
+			android:src="@drawable/ic_thumb_up"
+			android:layout_width="24dp"
+			android:layout_height="24dp"
+			android:padding="2dp"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="0"
+			android:gravity="center"
+			android:id="@+id/articleslistitemLikes"/>
+
+		<ImageView
+			android:src="@drawable/ic_account"
+			android:layout_width="24dp"
+			android:layout_height="24dp"
+			android:padding="2dp"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="User"
+			android:id="@+id/articleslistitemUser"/>
+
+		<ImageView
+			android:src="@drawable/ic_clock_time_three_outline"
+			android:layout_width="24dp"
+			android:layout_height="24dp"
+			android:padding="2dp"/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="4.03.2016"
+			android:id="@+id/articleslistitemTime"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

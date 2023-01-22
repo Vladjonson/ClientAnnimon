@@ -11,11 +11,16 @@
 	android:paddingTop="@dimen/activity_vertical_margin"
 	android:theme="@style/ThemeOverlay.AppCompat">
 
-	<ImageView
-		android:src="@drawable/web_logo"
+	<TextView
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="25dp"/>
+		android:text="aNNiMON.com"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:layout_marginTop="25dp"
+		android:textColor="@color/logoColor"
+		android:gravity="center_vertical|center_horizontal"
+		android:typeface="serif"
+		android:textStyle="bold"/>
 
 	<include
 		layout="@layout/menu_player"
@@ -24,3 +29,4 @@
 		android:gravity="bottom"/>
 
 </LinearLayout>
+

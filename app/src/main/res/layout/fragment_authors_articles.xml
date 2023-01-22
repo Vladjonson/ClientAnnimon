@@ -7,15 +7,20 @@
 	<ListView
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:id="@+id/fragmentgalleryListView"
-		android:divider="#00000000"
+		android:id="@+id/fragmentAuthorsArticlesListView"
 		android:layout_marginBottom="40dp"/>
 
-	<include
+	<RelativeLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		layout="@layout/nav_page"
-		android:layout_alignParentBottom="true"/>
+		android:layout_alignParentBottom="true">
+
+		<include
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			layout="@layout/nav_page"/>
+
+	</RelativeLayout>
 
 </RelativeLayout>
 

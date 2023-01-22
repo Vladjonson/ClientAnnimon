@@ -1,23 +1,24 @@
 package com.eximius.annimonclient;
 
+import com.eximius.annimonclient.data.Article;
 import com.eximius.annimonclient.data.Message;
 import com.eximius.annimonclient.data.News;
+import com.eximius.annimonclient.data.Photo;
+import com.eximius.annimonclient.data.PhotoAlbum;
 import com.eximius.annimonclient.data.User;
+import com.eximius.annimonclient.utils.WebRequest;
 import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import com.eximius.annimonclient.data.PhotoAlbum;
-import androidx.core.math.MathUtils;
-import com.eximius.annimonclient.data.Photo;
 
 public class Api {
 
 
     public static ArrayList<News> getNews(int page) {
-		//title - h2.statname
-		//author - div.statmenu small
-		//ArrayList<News> allNews=new ArrayList<News>();
+
 		try {
 			ArrayList<News> allNews=new ArrayList<News>();
 			Document doc= Jsoup.connect("https://annimon.com/str/news.php?start=" + page).get();
@@ -28,8 +29,8 @@ public class Api {
 			for (int i = 0; i < statNames.size(); i++) {
 				News news=new News();
 				news.setId(i);
-				news.setTitle(statNames.get(i).toString());
-				news.setAuthor(authors.get(i).toString());
+				news.setTitle(statNames.get(i).text());
+				news.setAuthor(authors.get(i).text());
 				news.setText(message.get(i).toString()
 							 .replace(news.getTitle(), "")
 							 .replace(news.getAuthor(), ""));
@@ -37,9 +38,6 @@ public class Api {
 			}
 			return allNews;
 		} catch (Exception e) {return new ArrayList<News>();}
-
-
-		//return allNews;
 	}
 
 	public static ArrayList<Message> getMessages() {
@@ -60,7 +58,7 @@ public class Api {
         //sender - 
         //message -
 		//date send - div.list2 small
-        
+
 		ArrayList<Message> allPosts=new ArrayList<Message>();
 
 		for (int i = 0; i < 10; i++) {
@@ -75,12 +73,11 @@ public class Api {
         return allPosts;
 	}
 
-	public static ArrayList<User> getUsers() {
-        //div.list2 td b
+	public static ArrayList<User> getUsers(int page) {
 
         try {
             ArrayList<User> allUsers=new ArrayList<User>();
-            Document doc=Jsoup.connect("https://annimon.com/str/users.php?sort=id&start=4520").get();
+            Document doc=Jsoup.connect("https://annimon.com/str/users.php?sort=id&start=" + page).get();
             Elements users1=doc.select("div.list1");
             Elements users2=doc.select("div.list2");
             for (int i=0;i < users1.size();i++) {
@@ -114,38 +111,78 @@ public class Api {
             }
             return allUsers;
         } catch (Exception e) {return new ArrayList<User>();}
-
 	}
-    
-    public static ArrayList<PhotoAlbum> getPhotoAlbums(){
-        
-        try{
+
+    public static ArrayList<PhotoAlbum> getPhotoAlbums(int page) {
+
+        try {
             ArrayList<PhotoAlbum> albums=new ArrayList<PhotoAlbum>();
-            //Document doc=Jsoup.connect("https://annimon.com/files/photo/1.jpg").get();
-            for(int i=0;i<50;i++){
+            Document doc=Jsoup.connect("https://annimon.com/albums/?start=" + page).get();
+            Elements albums1=doc.select("div.list1");
+            Elements albums2=doc.select("div.list2");
+
+            for (int i=0;i < albums1.size();i++) {
                 PhotoAlbum album=new PhotoAlbum();
-                album.setId(i);
-                album.setName("Photo album "+i);
-                album.setAuthor("User "+i);
-                album.setNumPhotos((int)(Math.random()*50));
+                album.setId(Integer.parseInt(albums1.get(i).select("a").get(0).attr("href").replace("./?act=album&id=", "")));
+                album.setName(albums1.get(i).select("a").get(1).text());
+                album.setAuthor(albums1.get(i).select("a").get(2).text());
+                album.setNumPhotos(Integer.parseInt(albums1.get(i).select("span[class=gray]").text().split(" ")[1]));
+                album.setUrlPhoto("https://annimon.com/albums/" + albums1.select("img").attr("src"));
+
+                PhotoAlbum album2=new PhotoAlbum();
+                album2.setId(Integer.parseInt(albums2.get(i).select("a").get(0).attr("href").replace("./?act=album&id=", "")));
+                album2.setName(albums2.get(i).select("a").get(1).text());
+                album2.setAuthor(albums2.get(i).select("a").get(2).text());
+                album2.setNumPhotos(Integer.parseInt(albums2.get(i).select("span[class=gray]").text().split(" ")[1]));
+                album2.setUrlPhoto("https://annimon.com/albums/" + albums2.select("img").attr("src"));
+
                 albums.add(album);
+                albums.add(album2);
             }
             return albums;
-        }catch(Exception e){return new ArrayList<PhotoAlbum>();}
-    }
-    
-    public static ArrayList<Photo> getPhotos(){
-        try{
-            ArrayList<Photo> photos=new ArrayList<Photo>();
-            
-            for (int i = 0; i < 50; i++) {
-                Photo photo=new Photo();
-                photo.setPhoto("");
-                photo.setImg("");
-                photos.add(photo);
-            }
-            return photos;
-        }catch(Exception e){return new ArrayList<Photo>();}
+        } catch (Exception e) {return new ArrayList<PhotoAlbum>();}
     }
 
+    public static ArrayList<Photo> getPhotos(int id) {
+        try {
+            ArrayList<Photo> photos=new ArrayList<Photo>();
+            WebRequest wr=new WebRequest();
+            String json=wr.makeWebServiceCall("https://annimon.com/json/album/list_photos?album_id=" + id, WebRequest.GET);
+
+            if (json != null) {
+                JSONObject rootJson = new JSONObject(json);
+                JSONArray photosJson =  rootJson.getJSONArray("photos");
+
+                for (int i = 0; i < photosJson.length(); i++) {
+                    JSONObject o=photosJson.getJSONObject(i);
+                    Photo photo=new Photo();
+                    photo.setId(o.getInt("id"));
+                    photo.setName(o.getString("name"));
+                    photo.setPhoto(o.getString("thumb").replace("http", "https"));
+                    photo.setPhoto(o.getString("photo").replace("http", "https"));
+                    photo.setText(o.getString("text"));
+                    photo.setTime(o.getLong("time"));
+                    photos.add(photo);
+                }
+            }
+            return photos;
+        } catch (Exception e) {return new ArrayList<Photo>();}
+    }
+
+    public static ArrayList<Article> getAuthorArticles() {
+        try {
+            ArrayList<Article> articles=new ArrayList<Article>();
+            for (int i=0;i < 10;i++) {
+                Article article=new Article();
+                article.setId(i);
+                article.setTitle("Title " + i);
+                article.setText("Some text ..." + i);
+                article.setLikes((int)(Math.random() * 10));
+                article.setAuthor("User" + (int)(Math.random() * 10));
+                article.setTime("18.01.22 / 22:31");
+                articles.add(article);
+            }
+            return articles;
+        } catch (Exception e) {return new ArrayList<Article>();}
+    }
 }

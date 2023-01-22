@@ -1,15 +1,13 @@
 package com.eximius.annimonclient.data;
 
 public class PhotoAlbum {
-    
+
     private int id;
     private String urlPhoto;
     private String name;
     private int numPhotos;
     private String author;
     private String description;
-    
-
 
     public void setId(int id) {
         this.id = id;
@@ -57,4 +55,5 @@ public class PhotoAlbum {
 
     public String getDescription() {
         return description;
-    }}
+    }
+}

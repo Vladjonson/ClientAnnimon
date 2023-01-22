@@ -14,13 +14,13 @@ import java.util.ArrayList;
 
 public class UserAdapter extends BaseAdapter {
 
-	ArrayList<User> allUsers;
-	Context context;
-	ImageView userAva;
-	TextView userNick;
-	ImageView userStatusOnline;
-	ImageView imgStatus;
-	TextView userStatus;
+	private ArrayList<User> allUsers;
+	private Context context;
+	private ImageView userAva;
+	private TextView userNick;
+	private ImageView userStatusOnline;
+	private ImageView imgStatus;
+	private TextView userStatus;
 
 	public UserAdapter(Context context, ArrayList<User> allUsers) {
 		this.context = context;
@@ -56,10 +56,12 @@ public class UserAdapter extends BaseAdapter {
 		imgStatus = v.findViewById(R.id.userslistitemImageStatus);
 		userStatus = v.findViewById(R.id.userslistitemStatus);
         userAva = v.findViewById(R.id.usersListItemAva);
+        
         try {
-            Glide.with(context).load("https://annimon.com/files/photo/" + allUsers.get(position).getId() + ".jpg").placeholder(R.drawable.ava).into(userAva);
-            //Glide.with(context).load(R.drawable.ava).into(userAva);
-            // Glide.with(context).load(R.drawable.ic_account).into(userAva);
+            Glide.with(context)
+                .load("https://annimon.com/files/photo/" + allUsers.get(position).getId() + ".jpg")
+                .placeholder(R.drawable.no_ava)
+                .into(userAva);
         } catch (Exception e) {}
 
 		userStatus.setText(allUsers.get(position).getStatus());
@@ -81,18 +83,14 @@ public class UserAdapter extends BaseAdapter {
          */
 		imgStatus.setColorFilter(context.getColor(R.color.colorAccent));
 
-
-
 		if (allUsers.get(position).isOnline()) {
 			userStatusOnline.setColorFilter(0xff4caf50);
 		} else {
 			userStatusOnline.setColorFilter(0xfff44336);
 		}
+        
 		userNick.setText(allUsers.get(position).getNick());
+        
 		return v;
 	}
-
-
-
-
 }
