@@ -15,7 +15,6 @@ public class PhotoAdapter extends BaseAdapter  {
 
     private Context context;
     private ArrayList<Photo> photos;
-    private ImageView img;
 
     public PhotoAdapter(Context context, ArrayList<Photo> photos) {
         this.context = context;
@@ -46,7 +45,7 @@ public class PhotoAdapter extends BaseAdapter  {
             v = vi.inflate(R.layout.photo_list_item, null);
         }
 
-        img = v.findViewById(R.id.photolistitemImageView);
+		ImageView  img = v.findViewById(R.id.photolistitemImageView);
 
         Glide.with(context)
             .load(getItem(position).getPhoto())

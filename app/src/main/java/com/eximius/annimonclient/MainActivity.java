@@ -24,6 +24,9 @@ import com.eximius.annimonclient.fragments.WriterCorner;
 import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 import com.eximius.annimonclient.utils.MiniFM;
+import android.view.Window;
+import android.widget.ProgressBar;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -33,12 +36,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 	private NavigationView navigationView;
 	private FragmentManager fragmentManager;
 	private ArrayList<Fragment> allFragments=new ArrayList<Fragment>();
+	ProgressBar progressBar;
+	
     //private MiniFM fm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+		progressBar=findViewById(R.id.content_mainProgressBar);
+		progressBar.setVisibility(View.GONE);
 
 		this.toolbar = findViewById(R.id.toolbar);
 		this.drawer = findViewById(R.id.drawer_layout);
@@ -104,5 +111,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 			}
 		}
 		return -1;
+	}
+	
+	public void showProgress(){
+		progressBar.setVisibility(View.VISIBLE);
+		//setProgressBarIndeterminate(true);
+	}
+	
+	public void hideProgress(){
+		progressBar.setVisibility(View.GONE);
+		//setProgressBarIndeterminate(false);
 	}
 }

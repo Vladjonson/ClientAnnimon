@@ -1,10 +1,6 @@
 apply plugin: 'com.android.application'
 
 android {
-	productFlavors {
-		flavor {
-		}
-	}
 
     compileSdkVersion 33
     buildToolsVersion "33.0.0"
@@ -12,10 +8,10 @@ android {
     defaultConfig {
 		
         applicationId "com.eximius.annimonclient"
-        minSdkVersion 28
+        minSdkVersion 23
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 106
+        versionName "1.0.6"
     }
     buildTypes {
         release {
@@ -26,13 +22,13 @@ android {
 }
 
 dependencies {
-	api 'androidx.recyclerview:recyclerview:1.0.0'
+	compile 'androidx.recyclerview:recyclerview:1.0.0'
 	//api 'androidx.lifecycle:lifecycle-livedata:+'
-	api 'androidx.lifecycle:lifecycle-livedata:1.0.0'
-    api 'androidx.appcompat:appcompat:1.0.0'
-	api 'com.google.android.material:material:1.0.0'
-	api 'org.jsoup:jsoup:1.13.1'
-	api 'com.github.bumptech.glide:glide:4.10.0'
+	compile 'androidx.lifecycle:lifecycle-livedata:1.0.0'
+    compile 'androidx.appcompat:appcompat:1.0.0'
+	compile 'com.google.android.material:material:1.0.0'
+	compile 'org.jsoup:jsoup:1.13.1'
+	compile 'com.github.bumptech.glide:glide:4.10.0'
 	
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }

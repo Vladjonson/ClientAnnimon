@@ -6,6 +6,10 @@ import com.eximius.annimonclient.data.News;
 import com.eximius.annimonclient.data.Photo;
 import com.eximius.annimonclient.data.PhotoAlbum;
 import com.eximius.annimonclient.data.User;
+import com.eximius.annimonclient.data.forum.Post;
+import com.eximius.annimonclient.data.forum.Section;
+import com.eximius.annimonclient.data.forum.SubSection;
+import com.eximius.annimonclient.data.forum.Topic;
 import com.eximius.annimonclient.utils.WebRequest;
 import java.util.ArrayList;
 import org.json.JSONArray;
@@ -185,4 +189,111 @@ public class Api {
             return articles;
         } catch (Exception e) {return new ArrayList<Article>();}
     }
+
+
+
+	//forum
+
+
+	//get sections
+	public static ArrayList<Section> forumGetSections() {
+		try {
+			ArrayList<Section> sections=new ArrayList<Section>();
+
+			WebRequest wr=new WebRequest();
+            String json=wr.makeWebServiceCall("https://annimon.com/json/forum/get_sections", WebRequest.GET);
+
+
+			//String json=Jsoup.connect("https://annimon.com/json/forum/get_sections").get().toString();
+
+
+			//
+			if (json != null) {
+				JSONObject rootJson=new JSONObject(json);
+				JSONArray jSections=rootJson.getJSONArray("sections");
+
+				for (int i=0;i < jSections.length();i++) {
+					//if(jSections.getJSONObject(i).getInt("hidden")!=1){
+					Section section=new Section();
+					section.setId(jSections.getJSONObject(i).getInt("id"));
+					section.setText(jSections.getJSONObject(i).getString("text"));
+					section.setHiden(jSections.getJSONObject(i).getInt("hidden"));
+					section.setSubsections(forumGetSubSections(jSections.getJSONObject(i).getJSONArray("subsections")));
+					sections.add(section);
+					//}
+				}
+			}
+			//
+			return sections;
+		} catch (Exception e) {return new ArrayList<Section>();}
+	}
+
+	//get subsections
+	public static ArrayList<SubSection> forumGetSubSections(JSONArray j) {
+		try {
+			ArrayList<SubSection> subSecrions=new ArrayList<SubSection>();
+			for (int i=0;i < j.length();i++) {
+				//if(j.getJSONObject(i).getInt("hidden")!=1){
+				SubSection subSection=new SubSection();
+				subSection.setId(j.getJSONObject(i).getInt("id"));
+				subSection.setText(j.getJSONObject(i).getString("text"));
+				subSection.setHiden(j.getJSONObject(i).getInt("hidden"));
+				subSecrions.add(subSection);
+				//	}
+			}
+			return subSecrions;
+		} catch (Exception e) {return new ArrayList<SubSection>();}
+	}
+
+	//get topics
+	public static ArrayList<Topic> forumGetTopics(int section, int page) {
+		try {
+			ArrayList<Topic> topics=new ArrayList<Topic>();
+			WebRequest wr=new WebRequest();
+            String json=wr.makeWebServiceCall("https://annimon.com/json/forum/get_topics?section=" + section + "limit=10&start=" + page, WebRequest.GET);
+
+			if (json != null) {
+				JSONObject rootJson=new JSONObject(json);
+				JSONArray jTopics=rootJson.getJSONArray("topics");
+
+				for (int i = 0; i < jTopics.length(); i++) {
+					Topic topic=new Topic();
+					topic.setId(jTopics.getJSONObject(i).getInt("topic"));
+					topic.setTitle(jTopics.getJSONObject(i).getString("title"));
+					topic.setIsClosed(jTopics.getJSONObject(i).getInt("is_closed"));
+					topic.setTime(jTopics.getJSONObject(i).getLong("time"));
+					topics.add(topic);
+                }
+			}
+
+			return topics;
+		} catch (Exception e) {return new ArrayList<Topic>();}
+	}
+
+	//get posts
+	public static ArrayList<Post> forumGetPosts(int topic, int page) {
+		try {
+			ArrayList<Post> posts=new ArrayList<Post>();
+			WebRequest wr=new WebRequest();
+            String json=wr.makeWebServiceCall("https://annimon.com/json/forum/get_posts?topic=" + topic + "&start=" + page + "&limit=10&html=1", WebRequest.GET);
+
+			if (json != null) {
+				JSONObject rootJson=new JSONObject(json);
+				JSONArray jTposts=rootJson.getJSONArray("posts");
+
+				for (int i = 0; i < jTposts.length(); i++) {
+					Post post=new Post();
+					post.setUser(jTposts.getJSONObject(i).getString("user"));
+					post.setUserId(jTposts.getJSONObject(i).getInt("user_id"));
+					post.setText(jTposts.getJSONObject(i).getString("text"));
+					post.setTime(jTposts.getJSONObject(i).getLong("time"));
+					post.setMessageId(jTposts.getJSONObject(i).getInt("message_id"));
+					post.setReplyToId(jTposts.getJSONObject(i).getInt("reply_to_id"));
+					posts.add(post);
+                }
+			}
+			return posts;
+		} catch (Exception e) {return new ArrayList<Post>();}
+	}
+
 }

@@ -56,7 +56,7 @@ public class UserAdapter extends BaseAdapter {
 		imgStatus = v.findViewById(R.id.userslistitemImageStatus);
 		userStatus = v.findViewById(R.id.userslistitemStatus);
         userAva = v.findViewById(R.id.usersListItemAva);
-        
+
         try {
             Glide.with(context)
                 .load("https://annimon.com/files/photo/" + allUsers.get(position).getId() + ".jpg")
@@ -88,9 +88,9 @@ public class UserAdapter extends BaseAdapter {
 		} else {
 			userStatusOnline.setColorFilter(0xfff44336);
 		}
-        
+
 		userNick.setText(allUsers.get(position).getNick());
-        
+
 		return v;
 	}
 }

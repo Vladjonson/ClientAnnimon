@@ -1,6 +1,5 @@
 package com.eximius.annimonclient.fragments;
 
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +11,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 import com.eximius.annimonclient.Api;
+import com.eximius.annimonclient.MainActivity;
 import com.eximius.annimonclient.R;
 import com.eximius.annimonclient.adapters.UserAdapter;
 
@@ -19,7 +19,6 @@ public class Users extends Fragment {
 
 	private ListView lv;
 	private UserAdapter adapter;
-    private ProgressDialog progressDialog;
     private int page;
     private Button btnPrevPage;
     private Button btnNextPage;
@@ -36,8 +35,6 @@ public class Users extends Fragment {
 		lv = view.findViewById(R.id.fragmentUsersListView);
         btnPrevPage = view.findViewById(R.id.navPagePrev);
         btnNextPage = view.findViewById(R.id.navPageNext);
-
-        progressDialog = new ProgressDialog(getActivity());
 
         new GetUsers().execute();
 
@@ -78,8 +75,7 @@ public class Users extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog.setTitle("Loading users...");
-            progressDialog.show();
+            ((MainActivity)getActivity()).showProgress();
         }
 
         @Override
@@ -96,7 +92,7 @@ public class Users extends Fragment {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             lv.setAdapter(adapter);
-            progressDialog.hide();
+            ((MainActivity)getActivity()).hideProgress();
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.eximius.annimonclient.fragments;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
+import com.eximius.annimonclient.MainActivity;
 import com.eximius.annimonclient.R;
 import com.eximius.annimonclient.data.ItemModel;
 import com.eximius.annimonclient.data.User;
@@ -23,7 +23,6 @@ import org.jsoup.nodes.Document;
 
 public class UserProfile extends Fragment {
 
-    private ProgressDialog progressDialog;
 	private ImageView userAva;
 	private TextView userNick;
 	private TextView userStatusOnline;
@@ -47,7 +46,7 @@ public class UserProfile extends Fragment {
 		userAva = view.findViewById(R.id.fragmentUserAva);
 		userNick = view.findViewById(R.id.fragmentUserNickName);
 		userStatusOnline = view.findViewById(R.id.fragmentUserStatusOnline);
-        progressDialog = new ProgressDialog(getActivity());
+
         new GetUser().execute();
 
         Glide.with(getContext())
@@ -70,8 +69,6 @@ public class UserProfile extends Fragment {
             Document doc=Jsoup.connect("https://annimon.com/user/" + user.getNick().toLowerCase()).get();
             String data=doc.select("div.maintxt").toString();
             user.setName(doc.getElementsByTag("meta").get(9).attr("content"));
-            //user.setBirthDay(data[1]);
-            //user.setAbout(data[2]);
         } catch (Exception e) {}
 	}
 
@@ -163,8 +160,7 @@ public class UserProfile extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog.setTitle("Loading User info...");
-            progressDialog.show();
+            ((MainActivity)getActivity()).showProgress();
         }
 
 
@@ -178,11 +174,12 @@ public class UserProfile extends Fragment {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            progressDialog.hide();
 
             itemsList = sortAndAddSections(getItems());
             ListAdapter adapter = new ListAdapter(getContext(), itemsList);
             lv.setAdapter(adapter);
+
+			((MainActivity)getActivity()).hideProgress();
         }
     }
 }

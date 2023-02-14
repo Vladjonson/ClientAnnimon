@@ -1,6 +1,5 @@
 package com.eximius.annimonclient.fragments;
 
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 import com.eximius.annimonclient.Api;
+import com.eximius.annimonclient.MainActivity;
 import com.eximius.annimonclient.R;
 import com.eximius.annimonclient.adapters.ArchiveNewsAdapter;
 
@@ -18,7 +18,6 @@ public class ArchiveNews extends Fragment {
 
 	private ListView lv;
 	private ArchiveNewsAdapter adapter;
-	private ProgressDialog progressDialog;
 	private int navPage=0;
     private Button navPrev;
     private Button navNext;
@@ -34,8 +33,6 @@ public class ArchiveNews extends Fragment {
 		lv = view.findViewById(R.id.fragmentarchivenewsListView);
         navPrev = view.findViewById(R.id.navPagePrev);
         navNext = view.findViewById(R.id.navPageNext);
-		progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setProgressStyle(android.R.attr.progressBarStyleSmall);
 
 		new GetNews().execute();
 
@@ -66,8 +63,7 @@ public class ArchiveNews extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-			progressDialog.setTitle("Loading news...");
-            progressDialog.show();
+			((MainActivity)getActivity()).showProgress();
         }
 
         @Override
@@ -84,7 +80,7 @@ public class ArchiveNews extends Fragment {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 			lv.setAdapter(adapter);
-			progressDialog.hide();
+			((MainActivity)getActivity()).hideProgress();
         }
     }
 }

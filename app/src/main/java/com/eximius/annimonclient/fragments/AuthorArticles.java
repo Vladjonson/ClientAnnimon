@@ -48,5 +48,5 @@ public class AuthorArticles extends Fragment {
             lv.setAdapter(adapter);
         }
     }
-    
+
 }

@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.eximius.annimonclient.R;
 import com.eximius.annimonclient.data.PhotoAlbum;
 import java.util.ArrayList;
@@ -17,9 +18,6 @@ public class GalleryAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<PhotoAlbum> allAlbums;
-    private ImageView image;
-    private TextView title;
-    private TextView author;
 
     public GalleryAdapter(Context context, ArrayList<PhotoAlbum> albums) {
         this.context = context;
@@ -50,12 +48,13 @@ public class GalleryAdapter extends BaseAdapter {
             v = vi.inflate(R.layout.gallery_list_item, null);
         }
 
-        image = v.findViewById(R.id.gallerylistitemImage);
-        title = v.findViewById(R.id.gallerylistitemTitle);
-        author = v.findViewById(R.id.gallerylistitemUser);
+		ImageView  image = v.findViewById(R.id.gallerylistitemImage);
+		TextView  title = v.findViewById(R.id.gallerylistitemTitle);
+		TextView  author = v.findViewById(R.id.gallerylistitemUser);
 
         Glide.with(context)
             .load(getItem(position).getUrlPhoto())
+			.diskCacheStrategy(DiskCacheStrategy.NONE)
             .placeholder(R.drawable.no_ava)
             .into(image);
 

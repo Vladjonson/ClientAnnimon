@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 import com.eximius.annimonclient.Api;
+import com.eximius.annimonclient.MainActivity;
 import com.eximius.annimonclient.R;
 import com.eximius.annimonclient.adapters.GalleryAdapter;
 
@@ -74,6 +75,7 @@ public class PhotoAlbums extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+			((MainActivity)getActivity()).showProgress();
         }
 
 
@@ -87,6 +89,7 @@ public class PhotoAlbums extends Fragment {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             lv.setAdapter(adapter);
+			((MainActivity)getActivity()).hideProgress();
         }
     }
 }

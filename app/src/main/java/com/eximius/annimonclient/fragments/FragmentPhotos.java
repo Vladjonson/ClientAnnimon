@@ -1,7 +1,6 @@
 package com.eximius.annimonclient.fragments;
 
 import android.app.DownloadManager;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Gallery;
 import androidx.fragment.app.Fragment;
 import com.eximius.annimonclient.Api;
+import com.eximius.annimonclient.MainActivity;
 import com.eximius.annimonclient.R;
 import com.eximius.annimonclient.adapters.PhotoAdapter;
 
@@ -24,7 +24,6 @@ public class FragmentPhotos extends Fragment {
 
     private Gallery galery;
     private PhotoAdapter adapter;
-    private ProgressDialog dialog;
     private int id;
 
     public FragmentPhotos(int id) {
@@ -41,7 +40,6 @@ public class FragmentPhotos extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         galery = view.findViewById(R.id.fragmentphotosGallery);
-        dialog = new ProgressDialog(getActivity());
 
         new GetPhotos().execute();
     }
@@ -76,8 +74,7 @@ public class FragmentPhotos extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog.setTitle("Loading photos...");
-            dialog.show();
+            ((MainActivity)getActivity()).showProgress();
         }
 
         @Override
@@ -90,7 +87,7 @@ public class FragmentPhotos extends Fragment {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             galery.setAdapter(adapter);
-            dialog.hide();
+            ((MainActivity)getActivity()).hideProgress();
         }
     }
 
@@ -99,9 +96,7 @@ public class FragmentPhotos extends Fragment {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog.setTitle("Download");
-            dialog.setMessage(String.format("Downloading %s...", adapter.getItem(galery.getSelectedItemPosition()).getName()));
-            dialog.show();
+            ((MainActivity)getActivity()).showProgress();
         }
 
         @Override
@@ -120,7 +115,7 @@ public class FragmentPhotos extends Fragment {
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            dialog.hide();
+            ((MainActivity)getActivity()).hideProgress();
         }
     }
 }
